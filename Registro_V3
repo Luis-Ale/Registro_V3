@@ -1,0 +1,59 @@
+from Registro_V1 import programa_standar_input;
+from Registro_Datos_V2 import Listado, Busqueda;
+import sys, os; import csv
+print("1) Registro \n")
+print("2) Listar \n")
+print("3) Busqueda \n")
+print("4) Editar \n")
+print("5) Eliminar \n")
+print("6) Salida \n")
+opcion = int(input("Elija: "))
+
+if(opcion == 1):
+    programa_standar_input()
+elif(opcion == 2):
+    Listado()
+elif(opcion == 3):
+    Busqueda()
+if (opcion == 4):
+    path = os.listdir()
+    print(path,"\n")
+    nombre_deseado = input("Introduzca el nombre del archivo que desear buscar: ")
+    print("\n")
+    with open(nombre_deseado, 'r') as f:
+         reader = list(csv.reader(f))
+    with open(nombre_deseado, 'w', newline='') as f:      
+        writer = csv.writer(f)
+        cedula = input("Ingrese cedula: ")
+        print()
+        for line in reader:
+            if line[0] != cedula:
+                writer.writerow(line)
+            if line[0] == cedula:
+                cedula = input("Cedula: ")
+                nombre = input("Nombre: ")
+                nombre = nombre.title()
+                apellido = input("Apellido: ")
+                apellido = apellido.title()
+                edad = int(input("Edad: "))
+
+                writer.writerow([cedula,nombre,apellido,edad])
+    print()
+if (opcion == 5):
+    path = os.listdir()
+    print(path,"\n")
+    nombre_deseado = input("Introduzca el nombre del archivo que desear buscar: ")
+    print("\n")
+    with open(nombre_deseado, 'r') as f:
+        reader = list(csv.reader(f))
+        
+    with open(nombre_deseado, 'w', newline='') as f:
+        writer = csv.writer(f)
+        find = input("Ingrese cedula: ")
+        for line in reader:
+            if line[0] != find:
+                writer.writerow(line)
+    print()
+if(opcion == 6):
+    sys.exit()
+
